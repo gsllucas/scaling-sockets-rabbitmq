@@ -1,12 +1,11 @@
 import { io } from 'socket.io-client';
+import { config } from 'dotenv';
 
-const socket = io('http://localhost:8080');
+config();
 
-socket.on('connect', () => {
-  console.log('Socket just connected', socket.id);
-});
+const WS_PORT = process.env.WS_PORT;
+const socket = io(`http://localhost:${WS_PORT}`);
 
-socket.on('socket:user_login', (payload) => {
-  const parse = JSON.parse(payload);
-  console.log('ws-client', parse.userId);
-});
+socket.on('queue:socket', (payload) =>
+  console.log('ws-client', JSON.parse(payload))
+);

@@ -1,31 +1,34 @@
 import amqp from 'amqplib';
 
+import { config } from 'dotenv';
+
+config();
+
 async function createAmqpConnection(vhost?: string): Promise<amqp.Connection> {
   const connection = await amqp.connect({
-    hostname: 'localhost',
-    username: 'admin',
-    password: 'admin',
-    port: 5673,
+    hostname: process.env.RABBITMQ_HOST,
+    username: process.env.RABBITMQ_USER,
+    password: process.env.RABBITMQ_PASSWORD,
+    port: Number(process.env.RABBITMQ_PORT),
     vhost,
   });
-  const version = connection.connection.serverProperties.version;
   return connection;
 }
 
-async function publish(userId?: string) {
+async function publish(value?: string) {
   const connection = await createAmqpConnection();
   const channel = await connection.createChannel();
 
-  await channel.assertQueue('queue:user_login', { durable: true });
-  await channel.assertExchange('exchange:user', 'direct', { durable: true });
-  await channel.bindQueue('queue:user_login', 'exchange:user', 'rk:user');
-  const payload = JSON.stringify({ userId });
-  channel.publish('exchange:user', 'rk:user', Buffer.from(payload));
-  console.log(`broker-publisher ${userId}`);
+  await channel.assertQueue('queue:socket', { durable: true });
+  await channel.assertExchange('exchange:socket', 'direct', { durable: true });
+  await channel.bindQueue('queue:socket', 'exchange:socket', 'rk:socket');
+  const payload = JSON.stringify({ value });
+  channel.publish('exchange:socket', 'rk:socket', Buffer.from(payload));
+  console.log(`broker-publisher ${value}`);
 }
 
 let counter = 0;
 setInterval(() => {
   counter++;
-  publish(`${counter} - ${process.pid}`);
-}, 1);
+  publish(`${counter} process: ${process.pid}`);
+}, 10);

@@ -11,11 +11,9 @@ export class RabbitMQBroker {
       port: Number(process.env.RABBITMQ_PORT),
       vhost,
     });
-    const version = connection.connection.serverProperties.version;
     return connection;
   }
 }
 
 const rabbitmqBroker = new RabbitMQBroker();
-
 export { rabbitmqBroker };

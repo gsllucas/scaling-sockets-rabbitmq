@@ -5,8 +5,8 @@ services:
     container_name: ws-rabbitmq-container
     image: rabbitmq:3.13.0-management
     ports:
-      - 5673:5672
-      - 15673:15672
+      - 5672:5672
+      - 15672:15672
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=admin
