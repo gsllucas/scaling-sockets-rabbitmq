@@ -11,7 +11,7 @@ const webSockets = new SocketService(socketIOSocketAdapter);
 webSockets.createWSServer();
 
 createAMQPConsumer(
-  { queue: 'queue:socket', durable: true, prefetchCount: 50 },
+  { queue: 'queue:socket', prefetchCount: 50, options: { durable: true } },
   async (payload) => {
     const payloadData = payload?.content.toString();
     webSockets.send('queue:socket', payloadData);
