@@ -22,7 +22,10 @@ async function publish(value?: string) {
   await channel.assertQueue('queue:socket', { durable: true });
   await channel.assertExchange('exchange:socket', 'direct', { durable: true });
   await channel.bindQueue('queue:socket', 'exchange:socket', 'rk:socket');
-  const payload = JSON.stringify({ value });
+  const payload = JSON.stringify({
+    socketChannel: 'socket:channel_name',
+    data: { message: 'Message sent by broker-publisher', value },
+  });
   channel.publish('exchange:socket', 'rk:socket', Buffer.from(payload));
   console.log(`broker-publisher ${value}`);
 }

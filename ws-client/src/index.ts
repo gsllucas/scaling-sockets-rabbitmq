@@ -6,6 +6,6 @@ config();
 const WS_PORT = process.env.WS_PORT;
 const socket = io(`http://localhost:${WS_PORT}`);
 
-socket.on('queue:socket', (payload) =>
+socket.on('socket:channel_name', (payload) =>
   console.log('ws-client', JSON.parse(payload))
 );
