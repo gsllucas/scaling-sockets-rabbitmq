@@ -4,11 +4,15 @@ This a proof of concept to escalate websockets application with messaging broker
 
 It is divided in 3 core application as below:
 
-- ws-service: service that has a messaging broker consumer that listens to that queue to send a socket event
+- ws-service: service that has a messaging broker consumer that listens to a queue to send a custom socket event according to necessity
 - ws-client: service that has a socket client to listen to socket events emitted by a queue event
 - broker-publisher: servicer that is emitting events through a messaging broker publisher
 
+Any another service can use ws-service to send real time messages in socket through a messaging broker publisher (rabbitMQ chosen here).
+
 ## Instalação
+
+> It's recommended to use node version > v16.x
 
 1. Install dependencies
 
