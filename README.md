@@ -5,7 +5,7 @@ This a proof of concept to escalate websockets application with messaging broker
 It is divided in 3 core application as below:
 
 - ws-service: service that has a messaging broker consumer that listens to a queue to send a custom socket event according to necessity
-- ws-client: service that has a socket client to listen to socket events emitted by a queue event
+- ws-client: service that has a socket client to listen to socket events emitted by ws-service throught the socket channel
 - broker-publisher: service that is emitting events through a messaging broker publisher
 
 Any another service can connect to ws-service through messaging HOST URL to send real time messages in socket as broker publisher (rabbitMQ chosen here).
@@ -37,7 +37,6 @@ Publisher sending payload must follow types as below:
 .ts file
 
 ```
-
 interface PublishPayloadOptions {
   socketChannel: string; // this is rescued in ws-service to send to the web socket channel
   data: any; // payload to send to socket channel, so socket listeners can consumes it
@@ -45,10 +44,10 @@ interface PublishPayloadOptions {
 
 JSON.stringify({
     socketChannel: 'socket:channel_name',
-    data: { message: 'Message sent by broker-publisher', value },
+    data: { message: 'Message sent by broker-publisher' },
 })
 ```
 
 ## Architecture
 
-![alt text](image-1.png)
+![architecture](image.png)
