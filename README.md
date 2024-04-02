@@ -10,7 +10,7 @@ It is divided in 3 core application as below:
 
 Any another service can connect to ws-service through messaging HOST URL to send real time messages in socket as broker publisher (rabbitMQ chosen here).
 
-**Why not sending events directly through as socket channel?**
+**Why not sending events directly through a socket channel?**
 
 Multiple simultaneous events can be harsh to a server, so a messaging broker helps to escalate for a large amount of connected clients
 
