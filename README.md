@@ -12,13 +12,13 @@ Any another service can connect to ws-service through messaging HOST URL to send
 
 **Why not sending events directly through a socket channel?**
 
-Multiple simultaneous events can be harsh to a server, so a messaging broker helps to escalate for a large amount of connected clients
+Multiple simultaneous events can be harsh to a server, so a messaging broker helps to escalate for a large amount of connected clients.
 
 ## Architecture
 
 ![ws-architecture](architecture.png)
 
-## Instalação
+## Installing
 
 > It's recommended to use node version > v16.x
 
@@ -42,12 +42,12 @@ Run `npm run start` in each folder
 
 Publisher sending payload must follow types as below:
 
+```
 .ts file
 
-```
 interface PublishPayloadOptions {
-  socketChannel: string; // this is rescued in ws-service to send to the web socket channel
-  data: any; // payload to send to socket channel, so socket listeners can consumes it
+  socketChannel: string;
+  data: any;
 }
 
 JSON.stringify({
