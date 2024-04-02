@@ -29,3 +29,22 @@ docker-compose up -d --build
 3. Open 3 terminals
 
 Run `npm run start` in each folder
+
+## Observations
+
+Publisher sending payload must follow types as below:
+
+.ts file
+
+```
+
+interface PublishPayloadOptions {
+  socketChannel: string; // this is rescued in ws-service to send to the web socket channel
+  data: any; // payload to send to socket channel, so socket listeners can consumes it
+}
+
+JSON.stringify({
+    socketChannel: 'socket:channel_name',
+    data: { message: 'Message sent by broker-publisher', value },
+})
+```
