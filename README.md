@@ -50,4 +50,4 @@ JSON.stringify({
 
 ## Architecture
 
-![architecture](image.png)
+![ws-architecture](architecture.png)
