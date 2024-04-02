@@ -10,6 +10,10 @@ It is divided in 3 core application as below:
 
 Any another service can connect to ws-service through messaging HOST URL to send real time messages in socket as broker publisher (rabbitMQ chosen here).
 
+## Architecture
+
+![ws-architecture](architecture.png)
+
 ## Instalação
 
 > It's recommended to use node version > v16.x
@@ -47,7 +51,3 @@ JSON.stringify({
     data: { message: 'Message sent by broker-publisher' },
 })
 ```
-
-## Architecture
-
-![ws-architecture](architecture.png)
