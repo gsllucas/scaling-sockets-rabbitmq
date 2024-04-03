@@ -1,6 +1,6 @@
 # Overview
 
-This a proof of concept to escalate websockets application with messaging broker.
+This a proof of concept to scaling websockets application with messaging broker.
 
 It is divided in 3 core application as below:
 
@@ -12,7 +12,7 @@ Any another service can connect to ws-service through messaging HOST URL to send
 
 **Why not sending events directly through a socket channel?**
 
-Multiple simultaneous events can be harsh to a server, so a messaging broker helps to escalate for a large amount of connected clients.
+Multiple simultaneous events can be harsh to a server, so a messaging broker helps to scaling for a large amount of connected clients.
 
 ## Architecture
 
